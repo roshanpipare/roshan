@@ -115,7 +115,7 @@ if __name__ == '__main__' :
     total_cnt = ro_code_master['ro_code'].count()
     ro_code_master = tuple(ro_code_master['ro_code'].unique())
     
-    N = 500
+    N = 1000
     i = 0
     j = N
     
@@ -141,6 +141,6 @@ i = 0, j = 500
 i = 500, j = 1000
 i = 1000, j = 1000 + 500 = 1500
 i = 49500, j = 50000
-
+"hello"
 
 
