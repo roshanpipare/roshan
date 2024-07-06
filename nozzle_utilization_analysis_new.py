@@ -143,4 +143,8 @@ i = 1000, j = 1000 + 500 = 1500
 i = 49500, j = 50000
 "hello"
 
-
+issue_data_prod['last_two_hour'] = [str(x)[11:19] for x in issue_data_prod['transaction_start_time']]
+issue_data_prod['transaction_date'] = np.where(issue_data_prod['last_two_hour'] == '00:00:00',issue_data_prod['transaction_date']-timedelta(1), issue_data_prod['transaction_date'])
+issue_data_prod = issue_data_prod.groupby(['ro_code', 'prodcode', 'transaction_date'])['ro_code', 'prodcode', 'transaction_date','transaction_start_time', 'total_transaction','total_quantity', 'nozzle_run_time', 'no_of_nozzle_iss', 'no_of_du_iss'].apply(lambda grp: grp.nlargest(2,columns = ['total_transaction','total_quantity'])).reset_index()
+issue_data_prod = issue_data_prod.groupby(['ro_code', 'prodcode', 'transaction_date'])['transaction_start_time', 'total_transaction','total_quantity', 'nozzle_run_time', 'no_of_nozzle_iss', 'no_of_du_iss'].apply(lambda grp: grp.nlargest(2,columns = ['total_transaction','total_quantity'])).reset_index()
+ 
